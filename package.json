@@ -91,18 +91,21 @@
     "presets": [
       "react-app"
     ],
-    "plugins": [[
-      "import",
-      {
-        "libraryName": "antd-mobile",
-        "style": "css"
-      }
-    ]]
+    "plugins": [
+      [
+        "import",
+        {
+          "libraryName": "antd-mobile",
+          "style": "css"
+        }
+      ]
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "devDependencies": {
-    "babel-plugin-import": "^1.8.0"
+    "babel-plugin-import": "^1.8.0",
+    "redux-thunk": "^2.3.0"
   }
 }
