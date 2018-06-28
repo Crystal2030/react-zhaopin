@@ -14,16 +14,16 @@ const User = mongoose.model('user', new mongoose.Schema({
     age: {type: Number, require: true}
 }));
 // create 新增数据
-/*User.create({
-    name: 'Linda',
-    age: 19
-}, function(err, doc) {
-    if(!err) {
-        console.log(doc);
-    } else {
-        console.log(err);
-    }
-});*/
+// User.create({
+//     user: 'Crystal',
+//     age: 18
+// }, function(err, doc) {
+//     if(!err) {
+//         console.log(doc);
+//     } else {
+//         console.log(err);
+//     }
+// });
 
 
 // 新建app

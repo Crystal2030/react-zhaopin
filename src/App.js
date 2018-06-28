@@ -36,7 +36,6 @@ class App extends React.Component {
     render() {
         // const store = this.props.store;
         // const num = store.getState();
-        console.log('******', this.props)
         return (
            <div>
                <h1>现在有机枪{this.props.num}</h1>
