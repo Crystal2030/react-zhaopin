@@ -98,7 +98,8 @@
           "libraryName": "antd-mobile",
           "style": "css"
         }
-      ]
+      ],
+      "transform-decorators-legacy"
     ]
   },
   "eslintConfig": {
@@ -106,6 +107,7 @@
   },
   "devDependencies": {
     "babel-plugin-import": "^1.8.0",
+    "react-redux": "^5.0.7",
     "redux-thunk": "^2.3.0"
   }
 }
