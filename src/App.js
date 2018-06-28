@@ -10,12 +10,14 @@ class App extends React.Component {
         const store = this.props.store;
         const num = store.getState();
         const addGun = this.props.addGun;
+        const addGunAsync = this.props.addGunAsync;
         const removeGun = this.props.removeGun;
         return (
            <div>
                <h1>现在有机枪{num}</h1>
                <button onClick={() => store.dispatch(addGun())}>申请机枪</button>
                <button onClick={() => store.dispatch(removeGun())}>上交机枪</button>
+               <button onClick={() => store.dispatch(addGunAsync())}>拖两天再上交机枪</button>
            </div>
         )
     }

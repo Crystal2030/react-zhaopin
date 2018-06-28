@@ -29,3 +29,11 @@ export function addGun() {
 export function removeGun() {
     return {type: REDUCE};
 }
+
+export function addGunAsync() {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(addGun());
+        }, 2000)
+    }
+}
