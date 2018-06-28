@@ -22,7 +22,7 @@ import {connect} from 'react-redux';
 //装饰器模式
 @connect(
     // 你要state什么属性放到props里面
-    state => ({num: state}),
+    state => ({num: state.counter}),
     // 你要的方法，放到props里面，自动dispatch
     {addGun, removeGun, addGunAsync}
 )
@@ -36,6 +36,7 @@ class App extends React.Component {
     render() {
         // const store = this.props.store;
         // const num = store.getState();
+        console.log('******', this.props)
         return (
            <div>
                <h1>现在有机枪{this.props.num}</h1>

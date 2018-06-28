@@ -4,7 +4,8 @@ const REDUCE = 'reduce';
 // 1. 新建store
 // 通过reducer建立   reducer
 // 根据老的state和action生成新的state
-export function counter(state=0, action) {
+export function counter(state=10, action) {
+    console.log('index.redux---->', state);
     switch(action.type) {
         case ADD:
             return state +1;
