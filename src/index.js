@@ -14,13 +14,14 @@ import {
     Redirect,
     Switch
 } from 'react-router-dom';
-// import {counter, addGun, removeGun, addGunAsync} from './index.redux';
-// import {counter} from './index.redux';
+import Login from './container/login/login';
+import Register from './container/register/register';
+import AuthRoute from './component/authroute/authroute';
+
 // 多个reducers 需要合并reducer
 import reducers from './reducer';
-import Auth from './Auth';
-import Dashboard from './Dashboard';
 import './config';
+import './index.css';
 
 const store = createStore(reducers, compose(
     applyMiddleware(thunk),
@@ -29,55 +30,20 @@ const store = createStore(reducers, compose(
 
 console.log('初始的state---->', store.getState())
 
-/*class Test extends React.Component{
-    render() {
-        console.log('----test---', this.props);
-        return <h2>测试组件{this.props.match.params.location}</h2>
-    }
-}*/
-/*
-登录
-    没有登录信息 同意跳转倒login
-页面  导航+显示+注销
-    一营
-    二营
-    骑兵连
-React+Redux
-*/
-// 使用react-redux就可以不用subscribe
+function Boss() {
+    return <h2>Boss页面</h2>
+}
+
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <div>
-                <Switch>
-                    {/*Switch只渲染命中的第一个Route*/}
-                    <Route path='/login' exact component={Auth}></Route>
-                    <Route path='/dashboard' component={Dashboard}></Route>
-                    <Redirect to='/dashboard'></Redirect>
-                </Switch>
-               {/* <ul>
-                    <li><Link to='/'>一营</Link></li>
-                    <li><Link to='/erying'>二营</Link></li>
-                    <li><Link to='/qibinglian'>骑兵连</Link></li>
-                </ul>*/}
+                <AuthRoute></AuthRoute>
+                <Route path='/boss' component={Boss}></Route>
+                <Route path='/login' component={Login}></Route>
+                <Route path='/register' component={Register}></Route>
             </div>
         </BrowserRouter>
     </Provider>
     , document.getElementById('root'));
-
-
-
-/*function render() {
-    ReactDOM.render(
-        <App store={store}
-             addGun={addGun}
-             removeGun={removeGun}
-             addGunAsync={addGunAsync}
-        />, document.getElementById('root'));
-}
-
-render();
-
-// 状态改变之后手动执行一下render
-store.subscribe(render);*/
 

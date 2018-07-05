@@ -8,7 +8,7 @@ const _filter = {'pwd': 0, '__v': 0}; // 统一要隐藏的查询字段
 
 Router.get('/info', function(req, res) {
     const {userid} = req.cookies;
-    if(!userid){
+    if(!userid){差点
         // 用户有没有
         return res.json({code: 1});
     }
