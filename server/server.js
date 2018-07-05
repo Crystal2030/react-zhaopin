@@ -1,18 +1,34 @@
 const express = require('express');
-const mongoose = require('mongoose');
-//1. 连接mongo 并且使用interview这个集合
-const DB_URL= 'mongodb://localhost:27017/interview';
-mongoose.connect(DB_URL);
-mongoose.connection.on('connected', function() {
-    console.log('mongo connect success')
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser'); // 解析cookie
+const userRouter = require('./user.js');
+
+const app = express();
+app.use(cookieParser());
+app.use(bodyParser.json());// 解析post过来的json数据
+app.use('/user', userRouter);
+
+app.listen(9093, function() {
+    console.log('Node app start at port 9093');
 });
+
+
+
+
+
+
+
+
+
+
+
 
 // 类似于mysql的表 mongo里有文档、字段的概念
 
-const User = mongoose.model('user', new mongoose.Schema({
+/*const User = mongoose.model('user', new mongoose.Schema({
     user: {type: String, require: true},
     age: {type: Number, require: true}
-}));
+}));*/
 // create 新增数据
 // User.create({
 //     user: 'Crystal',
@@ -34,13 +50,11 @@ const User = mongoose.model('user', new mongoose.Schema({
 //     console.log('update--->' + JSON.stringify(doc));
 // });
 
-const app = express();
 
-app.get('/', (req, res) => {
-    res.send('<h1>Hello world!</h1>')
-});
-
-app.get('/data', (req, res) => {
+// app.get('/', (req, res) => {
+//     res.send('<h1>Hello world!</h1>')
+// });
+/*app.get('/data', (req, res) => {
     // 查找数据
     User.find({}, function(err, doc){
         return res.json(doc);
@@ -49,8 +63,4 @@ app.get('/data', (req, res) => {
     //     return res.json(doc);
     // });
     // res.json({name: 'imooc app', type: 'IT'});
-});
-
-app.listen(9093, function() {
-    console.log('Node app start at port 9093');
-})
+});*/
