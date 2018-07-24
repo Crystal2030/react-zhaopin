@@ -18,12 +18,12 @@ class AuthRoute extends React.Component {
             return null;
         }
         // 获取用户信息
-        axios.get('/user/info').
-            then(res => {
+        axios.get('/user/info')
+            .then(res => {
                 if(res.status === 200) {
                     if(res.data.code=== 0) {
                         // 有登陆信息
-                        console.log('authroute--->', this.props.loadData, res.data.data)
+                        console.log('authroute--->',  res.data.data)
                         this.props.loadData(res.data.data);
                     } else {
                         // 没有登录信息，就跳转到登录页面
@@ -40,7 +40,7 @@ class AuthRoute extends React.Component {
 
     render() {
         return(
-            <div>判断跳转的地方</div>
+            <div></div>
         )
     }
 }

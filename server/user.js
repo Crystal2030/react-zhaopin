@@ -8,7 +8,7 @@ const _filter = {'pwd': 0, '__v': 0}; // 统一要隐藏的查询字段
 
 Router.get('/info', function(req, res) {
     const {userid} = req.cookies;
-    if(!userid){差点
+    if(!userid){
         // 用户有没有
         return res.json({code: 1});
     }
@@ -54,6 +54,22 @@ Router.post('/register', function(req, res) {
         })*/
     })
 });
+
+Router.post('/update', function(req, res) {
+    const userid = req.cookies.userid;
+    console.log('update---->', userid);
+    if(!userid) {
+        return json.dumps({code: 1});
+    }
+    const body = req.body;
+    User.findByIdAndUpdate(userid, body, function(err, doc){
+        const data = Object.assign({}, {
+            user: doc.user,
+            type: doc.type
+        }, body);
+        return res.json({code: 0, data});
+    })
+})
 
 Router.post('/login', function(req, res) {
     const {user, pwd} = req.body;
