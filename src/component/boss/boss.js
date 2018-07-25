@@ -24,7 +24,7 @@ class Boss extends React.Component {
     render() {
         return (
             <WingBlank>
-                {this.state.data.map(v=>(
+                {this.props.userList.map(v=>(
                    v.avatar ? (<Card key={v._id}>
                         <Header
                             title={v.user}
@@ -33,8 +33,8 @@ class Boss extends React.Component {
                         >
                         </Header>
                        <Body>
-                       {v.desc.split('\n').map(v => (
-                           <div key={v}>{v}</div>
+                       {v.desc.split('\n').map(d => (
+                           <div key={d}>{d}</div>
                        ))}
                        </Body>
                     </Card>) : null
