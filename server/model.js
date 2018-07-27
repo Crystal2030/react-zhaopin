@@ -19,7 +19,12 @@ const models = {
         'money': {type: String},
     },
     chat: {
-
+        'chatid': {type: String, require: true}, // 每个聊天唯一的标识， 两个用户的id拼接的
+        'from': {type: String, require: true},
+        'to': {type: String, require: true},
+        'read': {type: String, require: true, default: false}, // 未读消息字段
+        'content': {type: String, rquire: true, default: ''},
+        'create_time': {type: Number, default: new Date().getTime()}
     }
 }
 

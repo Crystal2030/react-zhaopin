@@ -3,6 +3,13 @@ const utility= require('utility'); // 加密密码
 const Router = express.Router();
 const models = require('./model');
 const User = models.getModel('user');
+const Chat = models.getModel('chat');
+
+// 删除所有消息
+/*Chat.remove({}, function(e, d) {
+
+});*/
+// User.remove({}, function(e, d) {});
 
 const _filter = {'pwd': 0, '__v': 0}; // 统一要隐藏的查询字段
 
@@ -28,6 +35,24 @@ Router.get('/list', function(req, res) {
     User.find({type: type}, function(err, doc) {
         return res.json({code: 0, data: doc});
     })
+});
+
+Router.get('/getmsglist', function(req, res) {
+   const user = req.cookies.user;
+   User.find({}, function(e, userdoc) {
+       let users = {};
+       userdoc.forEach(v=>{
+           users[v._id] = {name: v.user, avatar: v.avatar}
+       });
+       // 查询多个条件使用'$or'  '$or': [{from: user}, {to: user}]
+       Chat.find({'$or': [{from: user}, {to: user}]}, function(err, doc) {
+           if(!err) {
+               console.log('getmsglist--->', doc)
+               return res.json({code: 0, msgs: doc, users: users})
+           }
+       })
+    })
+
 });
 
 Router.post('/register', function(req, res) {
