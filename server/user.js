@@ -38,7 +38,7 @@ Router.get('/list', function(req, res) {
 });
 
 Router.get('/getmsglist', function(req, res) {
-   const user = req.cookies.user;
+   const user = req.cookies.userid;
    User.find({}, function(e, userdoc) {
        let users = {};
        userdoc.forEach(v=>{
@@ -107,6 +107,22 @@ Router.post('/login', function(req, res) {
         res.cookie('userid', doc._id);
         return res.json({code:0, data: doc})
     })
+});
+
+Router.post('/readmsg', function(req, res) {
+   const userid = req.cookies.userid;
+   const {from} = req.body;
+   console.log(userid + '----' + from);
+   Chat.update({from, to:userid}, {'$set': {read: true}},{'multi': true}, function(err, doc) {
+       /**
+        * mongoose默认修改第一条找到的数据，如果希望修改所有找到的数据，需要在传入一个参数：{'multi': true}
+        */
+       console.log('readmsg doc---》', doc);
+       if(!err) {
+           return res.json({code: 0, num: doc.nModified})
+       }
+       return res.json({code:1, msg:'修改失败'})
+   })
 });
 
 function md5Pwd(pwd) {

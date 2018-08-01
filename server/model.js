@@ -23,7 +23,7 @@ const models = {
         'from': {type: String, require: true},
         'to': {type: String, require: true},
         'read': {type: String, require: true, default: false}, // 未读消息字段
-        'content': {type: String, rquire: true, default: ''},
+        'content': {type: String, require: true, default: ''},
         'create_time': {type: Number, default: new Date().getTime()}
     }
 }

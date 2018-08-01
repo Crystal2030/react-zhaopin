@@ -6,12 +6,8 @@ import NavLinkBar from '../navlink/navlink';
 import Boss from '../../component/boss/boss';
 import Genius from '../../component/genius/genius';
 import User from '../../component/user/user';
+import Msg from '../../component/msg/msg';
 import {getMsgList, receiveMsg} from '../../redux/chat.redux';
-
-
-function Msg() {
-    return <h2>消息列表页面</h2>
-}
 
 @connect (
     state => state,
@@ -71,10 +67,11 @@ class Dashboard extends React.Component {
                 <div style={{marginTop: 45}}>
                     <Switch>
                         {
-                            navList.map(v=>(
-                                <Route key={v.path} path={v.path} component={v.component}/>
-                            ))
+                            navList.map(v=>{
+                               return (<Route key={v.path} path={v.path} component={v.component}/>);
+                            })
                         }
+
                     </Switch>
                 </div>
 

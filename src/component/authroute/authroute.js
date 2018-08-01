@@ -12,7 +12,6 @@ class AuthRoute extends React.Component {
     componentDidMount() {
         const publicList = ['/login', '/register'];
         const pathname = this.props.location.pathname;
-        console.log('pathname--->', pathname);
         // 如果pathname在publicList里面就不用获取用户信息
         if(publicList.indexOf(pathname) > -1) {
             return null;
@@ -23,7 +22,7 @@ class AuthRoute extends React.Component {
                 if(res.status === 200) {
                     if(res.data.code=== 0) {
                         // 有登陆信息
-                        console.log('authroute--->',  res.data.data)
+                        // console.log('authroute--->',  res.data.data)
                         this.props.loadData(res.data.data);
                     } else {
                         // 没有登录信息，就跳转到登录页面

@@ -1,7 +1,7 @@
 import React from 'react';
 import {List, InputItem, NavBar, Icon, Grid} from 'antd-mobile';
 import {connect} from 'react-redux';
-import {getMsgList, sendMsg, receiveMsg} from '../../redux/chat.redux';
+import {getMsgList, sendMsg, receiveMsg, readMsg} from '../../redux/chat.redux';
 import {getChatId} from "../../util";
 
 @connect(
@@ -9,7 +9,8 @@ import {getChatId} from "../../util";
     {
         getMsgList,
         sendMsg,
-        receiveMsg
+        receiveMsg,
+        readMsg
     }
 )
 class Chat extends React.Component {
@@ -18,11 +19,19 @@ class Chat extends React.Component {
         this.state = {text: '', msg: [], showEmoji: false}
     }
     componentDidMount() {
-        console.log('chat component did mount--->', this.props.chat.chatmsg.length)
+        console.log('chat component did mount--->', this.props)
         if(!this.props.chat.chatmsg.length) {
             this.props.getMsgList();
             this.props.receiveMsg();
         }
+
+    }
+
+    componentWillUnmount() {
+        // 当前路由离开的时候会被触发
+        console.log('unmout');
+        const to = this.props.match.params.user;
+        this.props.readMsg(to);
     }
 
     fixCarousel() {
@@ -64,10 +73,10 @@ class Chat extends React.Component {
                 >
                     {users[userId].name}
                 </NavBar>
-                {chatmsg.map(v=>{
+                {chatmsg.map((v, i)=>{
                     const avatar = require(`../img/${users[v.from].avatar}.png`);
                     return v.from === userId ? (
-                        <List  key={v._id}>
+                        <List  key={i}>
                             <Item
                                 thumb={avatar}
                             >
@@ -75,7 +84,7 @@ class Chat extends React.Component {
                             </Item>
                         </List>
                     ) : (
-                        <List  key={v._id}>
+                        <List  key={i}>
                             <Item
                                 className='chat-me'
                                 extra={<img src={avatar} alt={avatar} />}
